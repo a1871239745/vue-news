@@ -21,7 +21,7 @@ const store = new Vuex.Store({
     load: true,
     showMy: false,
     showLogin: false,
-    collection: [],
+    collection: JSON.parse(localStorage.getItem('collection'))|| [],
     likeImg: require("./assets/like.png")
   },
   mutations: {
@@ -99,7 +99,10 @@ const store = new Vuex.Store({
     }
   }
 })
-
+store.subscribe((mutations,state)=>{
+  localStorage.setItem('collection',JSON.stringify(state.collection))
+})
+export default store
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
